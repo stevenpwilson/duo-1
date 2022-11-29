@@ -4,7 +4,6 @@ metadata:
   name: nginx-config
 data:
   default.conf: |
-    events {}
     http {
       server {
         listen 80;
