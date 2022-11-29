@@ -19,7 +19,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh'''
-                kubectl apply -f .
+                kubectl apply -f backend.yaml
+                kubectl apply -f nginx.yaml
                 '''
             }
         }
