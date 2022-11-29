@@ -2,16 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
                 if (env.BRANCH_NAME == 'development') {
                     sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
                 } else {
                     sh "echo 'Build not required!'"
-                }
-            }
         }
         stage('Push') {
-            steps {
                 if (env.BRANCH_NAME == 'development') {
                     sh '''
                     docker push stratcastor/duo-backend:latest
@@ -20,10 +16,8 @@ pipeline {
                 } else {
                     sh "echo 'Push not required!'"
                 }
-            }
         }
         stage('Deploy') {
-            steps {
                 if (env.BRANCH_NAME == 'development') {
                     sh'''
                     kubectl apply -f backend.yaml --namespace=development
@@ -36,6 +30,5 @@ pipeline {
                     '''
                 }
             }
-        }
     }
 }
