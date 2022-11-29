@@ -2,3 +2,5 @@ nginx/
 Dockerfile
 .dockerignore
 README.md
+Jenkinsfile
+*.yaml
