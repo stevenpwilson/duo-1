@@ -11,7 +11,8 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
-                docker push stratcastor/duo-backend:latest stratcastor/duo-backend:$BUILD_NUMBER
+                docker push stratcastor/duo-backend:latest
+                docker push stratcastor/duo-backend:$BUILD_NUMBER
                 '''
             }
         }
