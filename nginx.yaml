@@ -4,12 +4,10 @@ metadata:
   name: nginx-config
 data:
   default.conf: |
-    http {
-      server {
-        listen 80;
-        location / {
-            proxy_pass http://backend:5500;
-        }
+    server {
+      listen 80;
+      location / {
+          proxy_pass http://backend:5500;
       }
     }
 ---
