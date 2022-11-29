@@ -6,6 +6,7 @@ pipeline {
                     sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
                 } else {
                     sh "echo 'Build not required!'"
+                }
         }
         stage('Push') {
                 if (env.BRANCH_NAME == 'development') {
@@ -32,4 +33,4 @@ pipeline {
             }
         }
     }
-}
+
