@@ -34,10 +34,14 @@ pipeline {
                         kubectl apply -f backend.yaml --namespace=development
                         kubectl apply -f nginx.yaml --namespace=development
                         '''
-                    } else {
+                    } else if (env.BRANCH_NAME == 'main') {
                         sh'''
                         kubectl apply -f backend.yaml --namespace=production
                         kubectl apply -f nginx.yaml --namespace=production
+                        '''
+                    } else {
+                        sh'''
+                        echo unrecognised branch'
                         '''
                     }
                 }
