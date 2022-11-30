@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'development') {
+                    if (env.GIT_BRANCH == 'development') {
                     sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
                     } else {
                         sh "echo 'Build not required!'"
@@ -15,7 +15,7 @@ pipeline {
         stage('Push') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'development') {
+                    if (env.GIT_BRANCH == 'development') {
                         sh '''
                         docker push stratcastor/duo-backend:latest
                         docker push stratcastor/duo-backend:$BUILD_NUMBER
@@ -29,21 +29,19 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'development') {
+                    if (env.GIT_BRANCH == 'development') {
                         sh'''
-                        kubectl apply -f backend.yaml --namespace=development
-                        kubectl apply -f nginx.yaml --namespace=development
-                        kubectl rolling-update backend --namespace=development --image=stratcastor/duo-backend:latest
+                        kubectl apply -f . --namespace=development
+                        kubectl rollout restart deployment backend --namespace=development
                         '''
-                    } else if (env.BRANCH_NAME == 'main') {
+                    } else if (env.GIT_BRANCH == 'main') {
                         sh'''
-                        kubectl apply -f backend.yaml --namespace=production
-                        kubectl apply -f nginx.yaml --namespace=production
-                        kubectl rolling-update backend --namespace=production --image=stratcastor/duo-backend:latest
+                        kubectl apply -f . --namespace=production
+                        kubectl rollout restart deployment backend --namespace=production
                         '''
                     } else {
                         sh'''
-                        echo unrecognised branch'
+                        echo "unrecognised branch"
                         '''
                     }
                 }
