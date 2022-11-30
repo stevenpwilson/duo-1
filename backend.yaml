@@ -31,6 +31,7 @@ spec:
       labels:
         app: backend
     spec:
+      imagePullPolicy: Always
       containers:
       - name: backend
         image: stratcastor/duo-backend:latest
