@@ -4,6 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo env.GIT_BRANCH
                     if (env.GIT_BRANCH == 'origin/development') {
                     sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
                     } else {
