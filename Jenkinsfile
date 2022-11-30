@@ -31,14 +31,12 @@ pipeline {
                 script {
                     if (env.GIT_BRANCH == 'development') {
                         sh'''
-                        kubectl apply -f backend.yaml --namespace=development
-                        kubectl apply -f nginx.yaml --namespace=development
+                        kubectl apply -f . --namespace=development
                         kubectl rollout restart deployment backend --namespace=development
                         '''
                     } else if (env.GIT_BRANCH == 'main') {
                         sh'''
-                        kubectl apply -f backend.yaml --namespace=production
-                        kubectl apply -f nginx.yaml --namespace=production
+                        kubectl apply -f . --namespace=production
                         kubectl rollout restart deployment backend --namespace=production
                         '''
                     } else {
