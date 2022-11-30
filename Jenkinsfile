@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     if (env.GIT_BRANCH == 'development') {
-                    sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
+                    sh 'docker build -t stevewilson/duo-backend:latest -t stevewilson/duo-backend:$BUILD_NUMBER .'
                     } else {
                         sh "echo 'Build not required!'"
                     }
@@ -17,8 +17,8 @@ pipeline {
                 script {
                     if (env.GIT_BRANCH == 'development') {
                         sh '''
-                        docker push stratcastor/duo-backend:latest
-                        docker push stratcastor/duo-backend:$BUILD_NUMBER
+                        docker push stevewilson/duo-backend:latest
+                        docker push stevewilson/duo-backend:$BUILD_NUMBER
                         '''
                     } else {
                         sh "echo 'Push not required!'"
