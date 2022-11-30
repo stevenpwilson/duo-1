@@ -58,8 +58,8 @@ spec:
           mountPath: /etc/nginx/conf.d
         resources:
           requests:
-            memory: "500ki"
+            memory: "1Mi"
             cpu: "10m"
           limits:
-            memory: "1Mi"
+            memory: "2Mi"
             cpu: "40m"
