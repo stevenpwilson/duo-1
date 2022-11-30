@@ -33,13 +33,13 @@ pipeline {
                         sh'''
                         kubectl apply -f backend.yaml --namespace=development
                         kubectl apply -f nginx.yaml --namespace=development
-                        kubectl rolling-update backend --namespace=development --image=stratcastor/duo-backend:latest
+                        kubectl set image deployment/backend --namespace=development --image=stratcastor/duo-backend:latest
                         '''
                     } else if (env.BRANCH_NAME == 'main') {
                         sh'''
                         kubectl apply -f backend.yaml --namespace=production
                         kubectl apply -f nginx.yaml --namespace=production
-                        kubectl rolling-update backend --namespace=production --image=stratcastor/duo-backend:latest
+                        kubectl set image deployment/backend --namespace=production --image=stratcastor/duo-backend:latest
                         '''
                     } else {
                         sh'''
