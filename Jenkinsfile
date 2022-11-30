@@ -43,7 +43,7 @@ pipeline {
                         '''
                     } else {
                         sh'''
-                        echo unrecognised branch'
+                        echo "unrecognised branch"
                         '''
                     }
                 }
