@@ -31,7 +31,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -56,10 +56,3 @@ spec:
         volumeMounts:
         - name: nginx-config-volume
           mountPath: /etc/nginx/conf.d
-        resources:
-          requests:
-            memory: "1Mi"
-            cpu: "10m"
-          limits:
-            memory: "2Mi"
-            cpu: "40m"
