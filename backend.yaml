@@ -18,7 +18,7 @@ metadata:
   labels:
     app: backend
 spec:
-  replicas: 10
+  replicas: 5
   selector:
     matchLabels:
       app: backend
@@ -37,11 +37,4 @@ spec:
         image: stratcastor/duo-backend:latest
         ports:
         - containerPort: 5500
-        resources:
-          requests:
-            memory: "1Mi"
-            cpu: "50m"
-          limits:
-            memory: "5Mi"
-            cpu: "100m"
 
